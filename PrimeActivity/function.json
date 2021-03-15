@@ -1,0 +1,10 @@
+{
+  "bindings": [
+    {
+      "name": "bounds",
+      "type": "activityTrigger",
+      "direction": "in"
+    }
+  ],
+  "scriptFile": "../dist/PrimeActivity/index.js"
+}

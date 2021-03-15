@@ -1,0 +1,10 @@
+{
+  "bindings": [
+    {
+      "name": "limits",
+      "type": "orchestrationTrigger",
+      "direction": "in"
+    }
+  ],
+  "scriptFile": "../dist/PrimeOrchestrator/index.js"
+}
