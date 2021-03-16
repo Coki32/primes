@@ -17,7 +17,6 @@ interface Range {
     length: number;
 };
 
-
 function getSegments(inclusiveStart: number, exclusiveEnd: number, runners: number): Array<Range> {
     let len = exclusiveEnd - inclusiveStart;
     let segmentLength = Math.ceil(len / runners);
@@ -31,7 +30,10 @@ function getSegments(inclusiveStart: number, exclusiveEnd: number, runners: numb
     return result;
 }
 
+
 function mergeNeighbors(ranges: Range[]): Range[] {
+    if(ranges.length===1)
+        return ranges;//funkcija pojede ovaj jedan jedini ako ima samo jedan
     let fixed: Range[] = [];
     ranges.sort((a, b) => a.to < b.to ? -1 : 1);
     for (let i = 0; i < ranges.length && ranges.length !== 1; i++) {
@@ -94,9 +96,13 @@ function splitRanges(ranges: Range[], maxLength: number): Range[] {
     return fixed;
 }
 
+
 const orchestrator = df.orchestrator(function* (context) {
     const activityName = "PrimeActivity";
     const { ranges, runners } = context.bindings.limits.input;
+
+    if ((ranges as Range[]).length === 0)
+        return { error: "Neispravan input, froms i tos nizovi moraju biti iste duzine" };
 
     let actualRanges = removeSubranges(mergeNeighbors(ranges as Range[]));
     let totalNumbers = actualRanges.map(ar => ar.length).reduce((sum, val) => sum + val, 0);
