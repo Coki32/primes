@@ -19,7 +19,6 @@ function getSegments(inclusiveStart: number, exclusiveEnd: number, runners: numb
     return result;
 }
 
-
 function mergeNeighbors(ranges: Range[]): Range[] {
     if(ranges.length===1)
         return ranges;//funkcija pojede ovaj jedan jedini ako ima samo jedan
